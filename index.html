@@ -7,17 +7,36 @@
 
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript">
-     
-        let apikey='NdXFjJC2Z5-HgDBjoNaueLO36hrPTyedCA-GNKcoSl6oYQV6qiIkWXI89HGaxlrEoBNYFt0CFYeiMhyb8rCYqUqWfbF0-qRXgBJOYHirnXdPjl2kjj_3w-6MySlmX3Yx'
-        fetch(`https://api.yelp.com/v3/autocomplete?text=del&latitude=45.4215&longitude=75.6972&apikey=${apikey}`)
-            .then(function(result){
-                return result.json()
-            })
-            .then(function(data){
-                console.log(data)
+    <script>
+        let latitude
+        let longitude
 
+        navigator.geolocation.getCurrentPosition(getRestaurants)
+
+        function getRestaurants(location){
+            latitude = location.coords.latitude.toFixed(6)
+            longitude = location.coords.longitude.toFixed(6)
+            fetchObject()
+        }
+        
+        function fetchObject (){
+            const YELP_API_KEY =
+                'NdXFjJC2Z5-HgDBjoNaueLO36hrPTyedCA-GNKcoSl6oYQV6qiIkWXI89HGaxlrEoBNYFt0CFYeiMhyb8rCYqUqWfbF0-qRXgBJOYHirnXdPjl2kjj_3w-6MySlmX3Yx'
+            const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/'
+            const BASE_URL = 'https://api.yelp.com/v3/businesses'
+            const geoCoords = `&latitude=${latitude}&longitude=${longitude}`
+            const url = `${CORS_PROXY}${BASE_URL}/search?term=coffee${geoCoords}`
+            fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + YELP_API_KEY
+            }
             })
-    </script>
+            .then(response => response.json())
+            .then(console.log)
+        }
+
+      </script>
+  
   </body>
 </html>
