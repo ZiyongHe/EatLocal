@@ -8,16 +8,20 @@
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
-     
-        let apikey='NdXFjJC2Z5-HgDBjoNaueLO36hrPTyedCA-GNKcoSl6oYQV6qiIkWXI89HGaxlrEoBNYFt0CFYeiMhyb8rCYqUqWfbF0-qRXgBJOYHirnXdPjl2kjj_3w-6MySlmX3Yx'
-        fetch(`https://api.yelp.com/v3/autocomplete?text=del&latitude=45.4215&longitude=75.6972&apikey=${apikey}`)
-            .then(function(result){
-                return result.json()
-            })
-            .then(function(data){
-                console.log(data)
-
-            })
+    function getZomatoData(lat, lon) {
+      const ZOMATO_API_KEY =
+        'e97f8a0c15411b5568c8f26befb3d704';
+        const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+        const BASE_URL = `https://developers.zomato.com/api/v2.1/search?`;
+        const url = `${CORS_PROXY}${BASE_URL}lat=${lat}&lon=${lon}`
+        fetch(url, {
+          headers: {
+            'user-key': ZOMATO_API_KEY
+          }
+        })
+          .then(response => response.json())
+          .then(console.log)
+    }
     </script>
   </body>
 </html>
