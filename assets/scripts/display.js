@@ -37,6 +37,25 @@ if (document.getElementById('is-closed')){
 document.getElementById('price').textContent=info[0].price || '$?'
 //Not all restaurants contain a expensive rating
 
+function createCardFooter(restaurantObj) {
+    const footer = document.createElement('footer')
+    footer.classList.add('card-footer')
+
+    const phoneNumber = document.createElement('div')
+    phoneNumber.classList.add('card-footer-item')
+    phoneNumber.innerHTML =
+        `<a href="tel:${restaurantObj.phone}"><i class="fas fa-phone mr-3"></i><span clas="icon" id="phone">${restaurantObj.display_phone}</span></a>`
+
+    const directions = document.createElement('div')
+    directions.classList.add('card-footer-item')
+    directions.innerHTML =
+        `<a href="https://www.google.com/maps/dir/?api=1&destination=${restaurantObj.name}"><span clas="icon"><i class="fas fa-directions mr-3"></i></span>Directions</a>`
+    
+    footer.appendChild(phoneNumber)
+    footer.appendChild(directions)
+    return footer
+}
+
 
 //I moved zomato function to here, cause didnt need it for searching until we have a specific name of a restaurant, havent put it to use yet
 function getZomatoData(lat, lon) {
