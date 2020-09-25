@@ -7,20 +7,20 @@ let info = yelpFetch.businesses
 if (yelpFetch){
     let col;
     yelpFetch.businesses.forEach(function(restaurant, index){
+        const zomatoListing = retrieveZomatoListing(restaurant.name)
         if (index % 2 === 0) {
             col = document.createElement('div')
             col.classList.add('columns');
-            col.appendChild(createDisplayCard(restaurant))
+            col.appendChild(createDisplayCard(restaurant, zomatoListing))
         } else {
             col.appendChild(createDisplayCard(restaurant))
             document.getElementById('cards').appendChild(col)
         }
-        console.log(retrieveZomatoListing(restaurant.name))
     })
 }
 
-function createDisplayCard(restaurantObj) {
-    const restaurantContent = createCardContent(restaurantObj)
+function createDisplayCard(restaurantObj, zomatoListing) {
+    const restaurantContent = createCardContent(restaurantObj, zomatoListing)
     const restaurantFooter = createCardFooter(restaurantObj)
     const restaurantCard = createCard(restaurantContent, restaurantFooter)
     return restaurantCard
@@ -42,9 +42,21 @@ function createCard(content, footer) {
     return cardCol;
 }
 
-function createCardContent(restaurantObj) {
+function createCardContent(restaurantObj, zomatoListing) {
     const cardContent = document.createElement('div')
     cardContent.classList.add('card-content', 'columns', 'is-desktop')
+
+    let timings = '';
+    let highlights = ''
+    if (zomatoListing) {
+        timings = zomatoListing.timings
+        zomatoListing.highlights.forEach(function(highlight, index) {
+            highlights += highlight
+            if (index < zomatoListing.highlights.length - 1) {
+                highlights += ', '
+            }
+        })
+    }
 
     const imageCol = createColumn()
     const imageWrap = document.createElement('figure');
@@ -59,7 +71,7 @@ function createCardContent(restaurantObj) {
     contentWrap.innerHTML =
         `<p class="title is-4" id="name">${restaurantObj.name}</p>
         <p class="subtitle is-5" id="type">${restaurantObj.categories[0].title}</p>
-        <p id='transaction'>Lunch, Dine in, Something</p>
+        <p id='transaction'>${highlights}</p>
         <p class="subtitle" id='price'>${restaurantObj.price ? restaurantObj.price : ''}</p>
         <img class="mb-0" id="rating" src="./assets/images/large_${Math.floor(restaurantObj.rating)}.png" alt="${Math.floor(restaurantObj.rating)} stars">
         <a href="${restaurantObj.url}"><img src="./assets/images/yelp_trademark.png" alt="" style="max-width: 70px; height: auto;"></a>
@@ -70,7 +82,8 @@ function createCardContent(restaurantObj) {
     distanceCol.classList.add('has-text-right-desktop')
     distanceCol.innerHTML =
         `<p class="subtitle is-5 mb-0" id='distance'>${(parseInt(restaurantObj.distance)/1000).toFixed(1)} km away from you</p>
-        <p class="subtitle is-5" id='is-closed'>${restaurantObj.is_closed ? 'Closed' : 'Open'}</p>`
+        <p class="subtitle is-5" id='is-closed'>${restaurantObj.is_closed ? 'Closed' : 'Open'}</p>
+        <p>${timings}</p>`
 
     cardContent.appendChild(imageCol)
     cardContent.appendChild(contentCol)
@@ -100,7 +113,7 @@ function createCardFooter(restaurantObj) {
 function retrieveZomatoListing(restaurantName) {
     for (restaurant of zomatoFetch.restaurants) {
         if (restaurantName === restaurant.restaurant.name) {
-            return restaurant
+            return restaurant.restaurant
         }
     }
     return null
