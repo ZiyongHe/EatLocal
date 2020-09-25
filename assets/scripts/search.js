@@ -21,18 +21,13 @@ function init(location){
 
 function handleSubmit(event, searchInput, latitude, longitude){
     event.preventDefault()
-    searching(searchInput, latitude, longitude)
-}
-
-function searching(searchTerm, latitude, longitude){
-    fetchRestaurants(searchTerm, latitude, longitude)
-    //direct to listing page
+    fetchRestaurants(searchInput, latitude, longitude)
 }
 
 function searchCategory(event, longitude, latitude){
     if (event.target.matches('.category')){
         searchTerm = event.target.textContent.trim()
-        searching(searchTerm, latitude, longitude)
+        fetchRestaurants(searchTerm, latitude, longitude)
     }
 
 }
