@@ -37,6 +37,19 @@ if (document.getElementById('is-closed')){
 document.getElementById('price').textContent=info[0].price || '$?'
 //Not all restaurants contain a expensive rating
 
+function createDisplayCard(restaurantObj) {
+    const restaurantContent = createCardContent(restaurantObj)
+    const restaurantFooter = createCardFooter(restaurantObj)
+    const restaurantCard = createCard(restaurantContent, restaurantFooter)
+    return restaurantCard
+}
+
+function createColumn() {
+    const column = document.createElement('div')
+    column.classList.add('column')
+    return column
+}
+
 function createCardContent(restaurantObj) {
     const cardContent = document.createElement('div')
     cardContent.classList.add('card-content', 'columns', 'is-desktop')
