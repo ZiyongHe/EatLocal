@@ -27,7 +27,7 @@ if (info[0].transactions.length === 0){
 }
 document.getElementById('distance').textContent=(parseInt(info[0].distance)/1000).toFixed(1).toString() + ' km'
 let rating = info[0].rating
-document.getElementById('rating').setAttribute('src',`./assets/images/large_${rating}.png`)
+document.getElementById('rating').setAttribute('src',`./assets/images/large_${Math.floor(rating)}.png`)
 document.getElementById('review').textContent=info[0].review_count + " reviews"
 if (document.getElementById('is-closed')){
     document.getElementById('is-closed').textContent='Closed'
