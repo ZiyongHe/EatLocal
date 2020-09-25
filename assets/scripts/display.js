@@ -50,6 +50,16 @@ function createColumn() {
     return column
 }
 
+function createCard(content, footer) {
+    const cardCol = createColumn()
+    const card = document.createElement('div')
+    card.classList.add('box')
+    card.appendChild(content)
+    card.appendChild(footer)
+    cardCol.appendChild(card)
+    return cardCol;
+}
+
 function createCardContent(restaurantObj) {
     const cardContent = document.createElement('div')
     cardContent.classList.add('card-content', 'columns', 'is-desktop')
