@@ -5,8 +5,16 @@ let info = yelpFetch.businesses
 //if there is search result, show them
 //if no search result within 10 km, show no result on the page
 if (yelpFetch){
-    yelpFetch.businesses.forEach(place => {
-        
+    let col;
+    yelpFetch.businesses.forEach(function(restaurant, index){
+        if (index % 2 === 0) {
+            col = document.createElement('div')
+            col.classList.add('columns');
+            col.appendChild(createDisplayCard(restaurant));
+        } else {
+            col.appendChild(createDisplayCard(restaurant));
+            document.getElementById('cards').appendChild(col)
+        }
     });
 }
 
@@ -134,7 +142,6 @@ function getZomatoData(lat, lon) {
             }
         )
     }
-
 document.getElementById('burger-menu').addEventListener('click', function(event){
     const menuID = event.target.dataset.target;
     const menu = document.getElementById(menuID);
