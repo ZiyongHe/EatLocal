@@ -10,12 +10,13 @@ if (yelpFetch){
         if (index % 2 === 0) {
             col = document.createElement('div')
             col.classList.add('columns');
-            col.appendChild(createDisplayCard(restaurant));
+            col.appendChild(createDisplayCard(restaurant))
         } else {
-            col.appendChild(createDisplayCard(restaurant));
+            col.appendChild(createDisplayCard(restaurant))
             document.getElementById('cards').appendChild(col)
         }
-    });
+        console.log(retrieveZomatoListing(restaurant.name))
+    })
 }
 
 function createDisplayCard(restaurantObj) {
@@ -94,6 +95,15 @@ function createCardFooter(restaurantObj) {
     footer.appendChild(phoneNumber)
     footer.appendChild(directions)
     return footer
+}
+
+function retrieveZomatoListing(restaurantName) {
+    for (restaurant of zomatoFetch.restaurants) {
+        if (restaurantName === restaurant.restaurant.name) {
+            return restaurant
+        }
+    }
+    return null
 }
 
 document.getElementById('burger-menu').addEventListener('click', function(event){
