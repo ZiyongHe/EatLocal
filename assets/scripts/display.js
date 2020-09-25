@@ -95,17 +95,19 @@ function createCardFooter(restaurantObj) {
     const footer = document.createElement('footer')
     footer.classList.add('card-footer')
 
-    const phoneNumber = document.createElement('div')
-    phoneNumber.classList.add('card-footer-item')
-    phoneNumber.innerHTML =
+    if (restaurantObj.phone) {
+        const phoneNumber = document.createElement('div')
+        phoneNumber.classList.add('card-footer-item')
+        phoneNumber.innerHTML =
         `<a href="tel:${restaurantObj.phone}"><i class="fas fa-phone mr-3"></i><span clas="icon" id="phone">${restaurantObj.display_phone}</span></a>`
+        footer.appendChild(phoneNumber)
+    }
 
     const directions = document.createElement('div')
     directions.classList.add('card-footer-item')
     directions.innerHTML =
         `<a href="https://www.google.com/maps/dir/?api=1&destination=${restaurantObj.name}"><span clas="icon"><i class="fas fa-directions mr-3"></i></span>Directions</a>`
-    
-    footer.appendChild(phoneNumber)
+
     footer.appendChild(directions)
     return footer
 }
