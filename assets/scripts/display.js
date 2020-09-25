@@ -96,25 +96,6 @@ function createCardFooter(restaurantObj) {
     return footer
 }
 
-
-//I moved zomato function to here, cause didnt need it for searching until we have a specific name of a restaurant, havent put it to use yet
-function getZomatoData(lat, lon) {
-    const ZOMATO_API_KEY =
-        'e97f8a0c15411b5568c8f26befb3d704';
-        const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
-        const BASE_URL = `https://developers.zomato.com/api/v2.1/search?`;
-        const url = `${CORS_PROXY}${BASE_URL}lat=${lat}&lon=${lon}`
-        fetch(url, {
-        headers: {
-            'user-key': ZOMATO_API_KEY
-        }
-        })
-        .then(response => response.json())
-        .then( function(data){
-            localStorage.setItem('zomatoFetch',JSON.stringify(data))
-            }
-        )
-    }
 document.getElementById('burger-menu').addEventListener('click', function(event){
     const menuID = event.target.dataset.target;
     const menu = document.getElementById(menuID);
