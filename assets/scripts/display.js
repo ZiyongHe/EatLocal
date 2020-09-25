@@ -37,6 +37,42 @@ if (document.getElementById('is-closed')){
 document.getElementById('price').textContent=info[0].price || '$?'
 //Not all restaurants contain a expensive rating
 
+function createCardContent(restaurantObj) {
+    const cardContent = document.createElement('div')
+    cardContent.classList.add('card-content', 'columns', 'is-desktop')
+
+    const imageCol = createColumn()
+    const imageWrap = document.createElement('figure');
+    imageWrap.classList.add('image')
+    imageWrap.innerHTML =
+        `<img id='image' src="${restaurantObj.image_url}">`
+    imageCol.appendChild(imageWrap);
+
+    const contentCol = createColumn()
+    const contentWrap = document.createElement('div')
+    contentWrap.classList.add('content')
+    contentWrap.innerHTML =
+        `<p class="title is-4" id="name">${restaurantObj.name}</p>
+        <p class="subtitle is-5" id="type">${restaurantObj.categories[0].title}</p>
+        <p id='transaction'>Lunch, Dine in, Something</p>
+        <p class="subtitle" id='price'>${restaurantObj.price ? restaurantObj.price : ''}</p>
+        <img class="mb-0" id="rating" src="./assets/images/large_${Math.floor(restaurantObj.rating)}.png" alt="${Math.floor(restaurantObj.rating)} stars">
+        <a href="${restaurantObj.url}"><img src="./assets/images/yelp_trademark.png" alt="" style="max-width: 70px; height: auto;"></a>
+        <p id="review">${restaurantObj.review_count} Reviews on Yelp</p>`
+    contentCol.appendChild(contentWrap)
+
+    const distanceCol = createColumn()
+    distanceCol.classList.add('has-text-right-desktop')
+    distanceCol.innerHTML =
+        `<p class="subtitle is-5 mb-0" id='distance'>${(parseInt(restaurantObj.distance)/1000).toFixed(1)} km away from you</p>
+        <p class="subtitle is-5" id='is-closed'>${restaurantObj.is_closed ? 'Closed' : 'Open'}</p>`
+
+    cardContent.appendChild(imageCol)
+    cardContent.appendChild(contentCol)
+    cardContent.appendChild(distanceCol)
+    return cardContent
+}
+
 function createCardFooter(restaurantObj) {
     const footer = document.createElement('footer')
     footer.classList.add('card-footer')
