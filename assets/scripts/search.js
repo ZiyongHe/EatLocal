@@ -1,9 +1,25 @@
-//ensure user accepts to get location first
-navigator.geolocation.getCurrentPosition(init)
+//check for localStorage of location info, if no ask for location permittion first
+//either way will call init function, and pass in location info 
+let latitude = localStorage.getItem('latitude') || 0
+let longitude = localStorage.getItem('longitude') ||0
+if (latitude === 0 || longitude === 0 ){
+    navigator.geolocation.getCurrentPosition(init)
+}else{
+    init('stored')
+}
 
 function init(location){
-    const latitude = location.coords.latitude.toFixed(6)
-    const longitude = location.coords.longitude.toFixed(6)
+    //if stored location info, load from local
+    //if newly received location info, extract lat & lon info, save to local
+    if (location === 'stored'){
+        latitude = localStorage.getItem('latitude')
+        longitude = localStorage.getItem('longitude')
+    }else{
+        latitude = location.coords.latitude.toFixed(6)
+        longitude = location.coords.longitude.toFixed(6)
+        localStorage.setItem('latitude',latitude)
+        localStorage.setItem('longitude',longitude)
+    }
 
     const searchInput = document.getElementById('searchTerm')
     const searchForm = document.getElementById('searchForm')

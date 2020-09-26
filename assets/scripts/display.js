@@ -1,6 +1,5 @@
 let yelpFetch = JSON.parse(localStorage.getItem('yelpFetch'))
 let zomatoFetch = JSON.parse(localStorage.getItem('zomatoFetch'))
-let info = yelpFetch.businesses
 
 //if there is search result, show them
 //if no search result within 10 km, show no result on the page
