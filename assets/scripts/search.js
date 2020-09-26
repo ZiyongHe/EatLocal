@@ -1,11 +1,16 @@
+startWithLocationCheck()
+
 //check for localStorage of location info, if no ask for location permittion first
 //either way will call init function, and pass in location info 
-let latitude = localStorage.getItem('latitude') || 0
-let longitude = localStorage.getItem('longitude') ||0
-if (latitude === 0 || longitude === 0 ){
-    navigator.geolocation.getCurrentPosition(init)
-}else{
-    init('stored')
+function startWithLocationCheck(){
+    let latitude = localStorage.getItem('latitude') || 0
+    let longitude = localStorage.getItem('longitude') || 0
+    
+    if (latitude === 0 || longitude === 0 ){
+        navigator.geolocation.getCurrentPosition(init)
+    }else{
+        init('stored')
+    }
 }
 
 function init(location){
