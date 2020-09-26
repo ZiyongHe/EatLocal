@@ -39,92 +39,21 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="block title">Find restaurants near you</h1>
-          <div class="field has-addons has-addons-centered">
+          <form class="field has-addons has-addons-centered" id="searchForm">
             <div class="control" style="width: 500px;">
-              <input type="text" class="input" placeholder="Search for a restaurant">
+              <input type="text" class="input" placeholder="Search for a restaurant" id="searchTerm">
             </div>
             <div class="control">
               <input type="submit" class="button is-info">
             </div>
-          </div>
+          </form>
       </div>
     </section>
     <!--End of hero-->
-    <section class="section">
-      <div class="columns">
-        <div class="column">
-          <div class="card box">
-            <div class="card-content columns columns is-desktop">
-              <div class="column">
-                <figure class="image">
-                  <img id='image' src="https://bulma.io/images/placeholders/256x256.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p class="title is-4" id="name">Restaurant Name</p>
-                  <p class="subtitle is-5" id="type">Restaurant type</p>
-                  <p id='transaction'>Lunch, Dine in, Something</p>
-                  <p class="subtitle" id='price'>$$$</p>
-                  <img class="mb-0" id="rating" src="./assets/images/large_0.png" alt="4 stars">
-                  <a href=""><img src="./assets/images/yelp_trademark.png" alt="" style="max-width: 70px; height: auto;"></a>
-                  <p id="review">20 Reviews</p>
-                </div>
-              </div>
-              <div class="column has-text-right-desktop">
-                <p class="subtitle is-5 mb-0" id='distance'>6km</p>
-                <p class="subtitle is-5" id='is-closed'>Open</p>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <div class="card-footer-item">
-                <a><i class="fas fa-phone mr-3"></i><span clas="icon" id="phone">123-456-7890</span></a>
-              </div>
-              <div class="card-footer-item">
-                <a><span clas="icon"><i class="fas fa-directions mr-3"></i></span>Directions</a>
-              </div>
-            </footer>
-          </div>
-        </div>
-        <!-- ************************************* -->
-        <div class="column">
-          <div class="card box">
-            <div class="card-content columns columns is-desktop">
-              <div class="column">
-                <figure class="image">
-                  <img src="https://bulma.io/images/placeholders/256x256.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p class="title is-4">Restaurant Name</p>
-                  <p class="subtitle is-5">Restaurant type</p>
-                  <p>Lunch, Dine in, Something</p>
-                  <p class="subtitle">$$$</p>
-                  <img class="mb-0" src="./assets/images/large_0.png" alt="4 stars">
-                  <a href=""><img src="./assets/images/yelp_trademark.png" alt="" style="max-width: 70px; height: auto;"></a>
-                  <p>20 Reviews</p>
-                </div>
-              </div>
-              <div class="column has-text-right-desktop">
-                <p class="subtitle is-5 mb-0">6km from you</p>
-                <p class="subtitle is-5">Open</p>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <div class="card-footer-item">
-                <a><span clas="icon"><i class="fas fa-phone mr-3"></i></span>123-456-7890</a>
-              </div>
-              <div class="card-footer-item">
-                <a><span clas="icon"><i class="fas fa-directions mr-3"></i></span>Directions</a>
-              </div>
-            </footer>
-          </div>
-        </div>
-      </div>
-    </div>
+    <section class="section" id="cards">
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="./script-search.js"></script>
+    <script src="./assets/scripts/search.js"></script>
+    <script src="./assets/scripts/display.js"></script>
   </body>
 </html>
