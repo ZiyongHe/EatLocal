@@ -21,27 +21,18 @@ function init(location){
 
 function handleSubmit(event, searchInput, latitude, longitude){
     event.preventDefault()
-    // fetchRestaurants(searchInput, latitude, longitude)
     if(searchInput.length === 0) {
-          
-        // const button = document.getElementById("mybutton");
         const modal = document.getElementById("formodal");
         const close = document.getElementsByClassName("modal-close")[0];
-        // button.onclick = function() {
-            modal.style.display = "block";
-//    } 
+        modal.style.display = "block";
         modal.onclick = function() {
             modal.style.display = "none";
             console.log(close);
         }
-        // window.onclick = function(event) {
-        //     if (event.target.className == "modal-background") {
-        //         modal.style.display = "none";
-        //         }
-        //     }
- 
-        }
-    else (fetchRestaurants(searchInput, latitude, longitude));
+    }
+    else {
+        fetchRestaurants(searchInput, latitude, longitude)
+    }
 }
 
 function searchCategory(event, longitude, latitude){
@@ -76,7 +67,6 @@ function fetchRestaurants (searchTerm, latitude, longitude){
 
 }
 
-//I moved zomato function to here, cause didnt need it for searching until we have a specific name of a restaurant, havent put it to use yet
 function getZomatoData(searchTerm, lat, lon) {
     const ZOMATO_API_KEY =
         'e97f8a0c15411b5568c8f26befb3d704';
@@ -92,7 +82,7 @@ function getZomatoData(searchTerm, lat, lon) {
         .then( function(data){
             console.log(data)
             localStorage.setItem('zomatoFetch',JSON.stringify(data))
-            // window.location = './search.html'
+            window.location = './search.html'
             }
         )
 }
