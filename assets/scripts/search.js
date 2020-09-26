@@ -1,10 +1,10 @@
 //ensure user accepts to get location first
 navigator.geolocation.getCurrentPosition(init)
 
+
 function init(location){
     const latitude = location.coords.latitude.toFixed(6)
     const longitude = location.coords.longitude.toFixed(6)
-
     const searchInput = document.getElementById('searchTerm')
     const searchForm = document.getElementById('searchForm')
     searchForm.addEventListener('submit', function(event) {
@@ -21,7 +21,18 @@ function init(location){
 
 function handleSubmit(event, searchInput, latitude, longitude){
     event.preventDefault()
-    fetchRestaurants(searchInput, latitude, longitude)
+    if(searchInput.length === 0) {
+        const modal = document.getElementById("formodal");
+        const close = document.getElementsByClassName("modal-close")[0];
+        modal.style.display = "block";
+        modal.onclick = function() {
+            modal.style.display = "none";
+            console.log(close);
+        }
+    }
+    else {
+        fetchRestaurants(searchInput, latitude, longitude)
+    }
 }
 
 function searchCategory(event, longitude, latitude){
@@ -48,6 +59,7 @@ function fetchRestaurants (searchTerm, latitude, longitude){
     })
     .then(response => response.json())
     .then( function(data){
+        console.log(data)
         localStorage.setItem('yelpFetch',JSON.stringify(data))
         getZomatoData(searchTerm, latitude, longitude)
         }
@@ -55,7 +67,6 @@ function fetchRestaurants (searchTerm, latitude, longitude){
 
 }
 
-//I moved zomato function to here, cause didnt need it for searching until we have a specific name of a restaurant, havent put it to use yet
 function getZomatoData(searchTerm, lat, lon) {
     const ZOMATO_API_KEY =
         'e97f8a0c15411b5568c8f26befb3d704';
@@ -82,3 +93,14 @@ document.getElementById('burger-menu').addEventListener('click', function(event)
     event.target.classList.toggle('is-active');
     menu.classList.toggle('is-active');
 })
+
+
+      
+
+
+        
+        
+  
+    
+
+

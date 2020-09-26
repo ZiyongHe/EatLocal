@@ -1,10 +1,14 @@
 let yelpFetch = JSON.parse(localStorage.getItem('yelpFetch'))
 let zomatoFetch = JSON.parse(localStorage.getItem('zomatoFetch'))
-let info = yelpFetch.businesses
+if (yelpFetch) {
+    let info = yelpFetch.businesses 
+}
+
+
 
 //if there is search result, show them
 //if no search result within 10 km, show no result on the page
-if (yelpFetch){
+if (yelpFetch.total > 0){
     let col;
     yelpFetch.businesses.forEach(function(restaurant, index){
         const zomatoListing = retrieveZomatoListing(restaurant.name)
@@ -18,6 +22,11 @@ if (yelpFetch){
         }
     })
 }
+else if (yelpFetch.total === 0) {
+    document.getElementById("cards").innerHTML = "<h2>Sorry No search result</h2>"
+    console.log(yelpFetch.total);
+}
+
 
 function createDisplayCard(restaurantObj, zomatoListing) {
     const restaurantContent = createCardContent(restaurantObj, zomatoListing)
