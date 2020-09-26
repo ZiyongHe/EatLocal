@@ -1,10 +1,10 @@
 //ensure user accepts to get location first
 navigator.geolocation.getCurrentPosition(init)
 
+
 function init(location){
     const latitude = location.coords.latitude.toFixed(6)
     const longitude = location.coords.longitude.toFixed(6)
-
     const searchInput = document.getElementById('searchTerm')
     const searchForm = document.getElementById('searchForm')
     searchForm.addEventListener('submit', function(event) {
@@ -21,7 +21,27 @@ function init(location){
 
 function handleSubmit(event, searchInput, latitude, longitude){
     event.preventDefault()
-    fetchRestaurants(searchInput, latitude, longitude)
+    // fetchRestaurants(searchInput, latitude, longitude)
+    if(searchInput.length === 0) {
+          
+        // const button = document.getElementById("mybutton");
+        const modal = document.getElementById("formodal");
+        const close = document.getElementsByClassName("modal-close")[0];
+        // button.onclick = function() {
+            modal.style.display = "block";
+//    } 
+        modal.onclick = function() {
+            modal.style.display = "none";
+            console.log(close);
+        }
+        // window.onclick = function(event) {
+        //     if (event.target.className == "modal-background") {
+        //         modal.style.display = "none";
+        //         }
+        //     }
+ 
+        }
+    else (fetchRestaurants(searchInput, latitude, longitude));
 }
 
 function searchCategory(event, longitude, latitude){
@@ -48,6 +68,7 @@ function fetchRestaurants (searchTerm, latitude, longitude){
     })
     .then(response => response.json())
     .then( function(data){
+        console.log(data)
         localStorage.setItem('yelpFetch',JSON.stringify(data))
         getZomatoData(searchTerm, latitude, longitude)
         }
@@ -71,7 +92,7 @@ function getZomatoData(searchTerm, lat, lon) {
         .then( function(data){
             console.log(data)
             localStorage.setItem('zomatoFetch',JSON.stringify(data))
-            window.location = './search.html'
+            // window.location = './search.html'
             }
         )
 }
@@ -82,3 +103,14 @@ document.getElementById('burger-menu').addEventListener('click', function(event)
     event.target.classList.toggle('is-active');
     menu.classList.toggle('is-active');
 })
+
+
+      
+
+
+        
+        
+  
+    
+
+
