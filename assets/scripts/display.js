@@ -124,10 +124,3 @@ function retrieveZomatoListing(restaurantName) {
     }
     return null
 }
-
-document.getElementById('burger-menu').addEventListener('click', function(event){
-    const menuID = event.target.dataset.target;
-    const menu = document.getElementById(menuID);
-    event.target.classList.toggle('is-active');
-    menu.classList.toggle('is-active');
-  });
