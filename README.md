@@ -1,12 +1,23 @@
-# TeamAProject
+# Eat Local
+![Screenshot of Eat Local](./eatlocal_screenshot.png)
 
-Overview
-This project is to create an application that allows people to be a responsible citizen and supporting neighborhood by ordering food from restaurants in the neighborhood.
+An app that shows restaurants near you! Search by keyword of what you're craving or click on a category provided if it catches your eye. *Eat Local* focuses on restaurants within 10km of you so you can get to the food you want, faster.
 
-The application contain following functionalities:
+## User Story
+```
+As a hungry, responsible citizen,
+I want to search for restaurants near me
+so that I can support local businesses
+```
 
-1. access your current location
-2. look for restaurants according to searching criteria, in the neighborhood through radius range 
-3. show a list of resulting restaurants with restaurant name, image, Menu, rating, supported transaction, and ordering phone number
+## Functionalities
+1. The app will ask permission before getting your location
+2. You can look for restaurants using the search bar or clicking on a category
+3. View relevant data about the restaurants you searched for: rating, phone number, directions etc.
 
-The application will utilize two APIs: Yelp and Zomato
+## Built with:
+- [Zomato API](https://developers.zomato.com/api)
+- [Yelp API](https://www.yelp.com/developers/documentation/v3/business_search)
+- [Maps URLS](https://developers.google.com/maps/documentation/urls/get-started)
+- [Bulma](https://bulma.io/documentation/)
+- :heart:
